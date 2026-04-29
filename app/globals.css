@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* يطابق dark: مع next-themes (فئة .dark على html) بدل prefers-color-scheme فقط */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/**
+ * Brand Book — متغيّرات الهوية (الألوان ثابتة كما في الدليل).
+ * الشفافيات عبر color-mix في مساحة oklch لنعومة متّسقة.
+ */
+:root {
+  --color-primary: #be1622;
+  --color-primary-hover: #a1121b;
+  --color-secondary: #1319b4;
+  --color-accent: #590159;
+  --color-dark: #010a2d;
+  --color-dark-surface: #0a1030;
+  --color-cream: #fffbf5;
+
+  /* --font-ar و --font-en يُحقنان من next/font على عنصر html */
+
+  --primary-soft: color-mix(in oklch, var(--color-primary) 5%, transparent);
+  --primary-soft-10: color-mix(in oklch, var(--color-primary) 10%, transparent);
+  --primary-soft-15: color-mix(in oklch, var(--color-primary) 15%, transparent);
+  --primary-soft-40: color-mix(in oklch, var(--color-primary) 40%, transparent);
+  --secondary-soft-8: color-mix(in oklch, var(--color-secondary) 8%, transparent);
+  --secondary-soft-10: color-mix(in oklch, var(--color-secondary) 10%, transparent);
+  --accent-soft-5: color-mix(in oklch, var(--color-accent) 5%, transparent);
+  --accent-soft-10: color-mix(in oklch, var(--color-accent) 10%, transparent);
+  --accent-soft-80: color-mix(in oklch, var(--color-accent) 80%, transparent);
+  --dark-soft-90: color-mix(in oklch, var(--color-dark) 90%, transparent);
+  --dark-soft-6: color-mix(in oklch, var(--color-dark) 6%, transparent);
+  --cream-soft-80: color-mix(in oklch, var(--color-cream) 80%, transparent);
+
+  --page-bg: var(--color-cream);
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: color-mix(in oklch, var(--color-dark) 52%, white);
+  --border-subtle: color-mix(in oklch, var(--color-dark) 7%, transparent);
+  --header-bg: var(--cream-soft-80);
+  --shadow-primary-glow: color-mix(in oklch, var(--color-primary) 28%, transparent);
+}
+
+.dark {
+  --page-bg: var(--color-dark);
+  --card-bg: var(--color-dark-surface);
+  --text-main: #fff9f0;
+  --text-muted: color-mix(in oklch, white 68%, var(--color-dark));
+  --border-subtle: color-mix(in oklch, white 10%, transparent);
+  --header-bg: var(--dark-soft-90);
+  --shadow-primary-glow: color-mix(in oklch, var(--color-primary) 35%, transparent);
+}
+
+@theme {
+  --font-sans: var(--font-ar), var(--font-en), ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #be1622;
+  --color-primary-hover: #a1121b;
+  --color-secondary: #1319b4;
+  --color-accent: #590159;
+  --color-brand-dark: #010a2d;
+  --color-brand-dark-surface: #0a1030;
+  --color-cream: #fffbf5;
+  --shadow-primary-soft: 0 18px 44px -14px color-mix(in oklch, #be1622 22%, transparent);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-ar), var(--font-en), "IBM Plex Sans Arabic", "Source Sans 3", system-ui, sans-serif;
+    background-color: var(--page-bg);
+    color: var(--text-main);
+    @apply antialiased selection:bg-primary/15 selection:text-primary;
+  }
+}
+
+@layer utilities {
+  .bg-page {
+    background-color: var(--page-bg);
+  }
+
+  .bg-card {
+    background-color: var(--card-bg);
+  }
+
+  .text-foreground {
+    color: var(--text-main);
+  }
+
+  .text-muted-foreground {
+    color: var(--text-muted);
+  }
+
+  .border-brand-subtle {
+    border-color: var(--border-subtle);
+  }
+}
+
+.glass-morphism {
+  background: color-mix(in oklch, white 80%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in oklch, white 30%, transparent);
+}
+
+.dark .glass-morphism {
+  background: color-mix(in oklch, var(--color-dark) 82%, transparent);
+  border: 1px solid color-mix(in oklch, white 10%, transparent);
+}
+
+.logo-gradient {
+  background: linear-gradient(135deg, #1319b4, #590159, #be1622);
+}
+
+.luxury-shadow {
+  box-shadow: 0 24px 56px -18px color-mix(in oklch, var(--color-dark) 12%, transparent);
+}
+
+.dark .luxury-shadow {
+  box-shadow: 0 24px 56px -18px color-mix(in oklch, black 55%, transparent);
+}
+
+.sidebar-chat-height {
+  height: calc(100vh - 70px);
+}
+
+/* Premium button shimmer (يُدمَج مع مكوّن الزر) */
+@keyframes btn-shimmer {
+  0% {
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-12deg);
+  }
+}
+
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition-property: transform, box-shadow, background-color, border-color, color;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.btn-premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    color-mix(in oklch, white 42%, transparent) 50%,
+    transparent 65%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-premium:hover::after {
+  opacity: 1;
+  animation: btn-shimmer 0.85s ease-out;
+}
+
+.bg-gradient-page {
+  background: linear-gradient(
+    180deg,
+    var(--color-cream) 0%,
+    color-mix(in oklch, white 96%, var(--color-cream)) 45%,
+    #ffffff 100%
+  );
+}
+
+.dark .bg-gradient-page {
+  background: linear-gradient(
+    180deg,
+    var(--color-dark) 0%,
+    var(--color-dark-surface) 55%,
+    var(--color-dark) 100%
+  );
+}
