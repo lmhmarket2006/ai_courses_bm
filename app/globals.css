@@ -41,6 +41,9 @@
 }
 
 .dark {
+  /* درجات أعلى سطوعاً لتحسين تباين النصوص في الوضع الداكن */
+  --color-secondary: #8ea2ff;
+  --color-accent: #c78dff;
   --page-bg: var(--color-dark);
   --card-bg: var(--color-dark-surface);
   --text-main: #fff9f0;
