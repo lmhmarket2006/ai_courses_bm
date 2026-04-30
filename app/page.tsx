@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowUp, Bot } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowUp } from 'lucide-react';
 import Header from '@/components/Header';
 import ChatBot from '@/components/ChatBot';
 import CourseList from '@/components/CourseList';
@@ -40,8 +41,15 @@ export default function Home() {
                 className="group flex w-full items-center justify-between rounded-[2rem] border border-brand-subtle bg-card p-5 text-foreground transition-all duration-500 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/10"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br from-secondary via-accent to-primary text-white shadow-lg">
-                    <Bot size={24} />
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br from-secondary via-accent to-primary text-white shadow-lg">
+                    <Image
+                      src="/assistant-mobile-icon.png"
+                      alt="أيقونة المساعد الذكي"
+                      width={48}
+                      height={48}
+                      className="h-full w-full object-cover"
+                      priority
+                    />
                   </div>
                   <div className="text-right">
                     <h3 className="mb-0.5 text-sm font-black">مساعدك الذكي</h3>
@@ -156,7 +164,14 @@ export default function Home() {
             className="fixed bottom-8 right-8 z-50 flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-primary via-accent to-secondary text-white shadow-2xl ring-1 ring-white/20 transition-all hover:scale-105 active:scale-95 lg:hidden"
           >
             <div className="relative">
-              <Bot size={28} />
+              <Image
+                src="/assistant-mobile-icon.png"
+                alt="أيقونة المساعد الذكي"
+                width={44}
+                height={44}
+                className="rounded-xl object-cover"
+                priority
+              />
               <span className="absolute -right-1 -top-1 h-3.5 w-3.5 animate-pulse rounded-full border-2 border-accent bg-green-500" />
             </div>
           </motion.button>
