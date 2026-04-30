@@ -6,29 +6,17 @@ import { ArrowUp, Bot } from 'lucide-react';
 import Header from '@/components/Header';
 import ChatBot from '@/components/ChatBot';
 import CourseList from '@/components/CourseList';
-import CourseDetailsSection from '@/components/CourseDetailsSection';
 import RecommenderCTA from '@/components/RecommenderCTA';
 import RecommenderModal from '@/components/recommender/RecommenderModal';
 import InstructorBadge from '@/components/InstructorBadge';
 import { Testimonials, FAQSection, StatsSection } from '@/components/TrustSections';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { SectionReveal } from '@/components/motion/SectionReveal';
-import { COURSES, type Course } from '@/lib/courses';
 import { ACADEMY } from '@/lib/config';
 
 export default function Home() {
-  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isRecommenderOpen, setIsRecommenderOpen] = useState(false);
-
-  const handleSelectCourse = (id: string) => {
-    const course = COURSES.find((c) => c.id === id) ?? null;
-    setSelectedCourse(course);
-
-    requestAnimationFrame(() => {
-      document.getElementById('course-details-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  };
 
   return (
     <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-page font-sans text-foreground">
@@ -88,7 +76,7 @@ export default function Home() {
             </SectionReveal>
 
             <SectionReveal className="mt-8">
-              <CourseList onSelectCourse={handleSelectCourse} />
+              <CourseList />
             </SectionReveal>
 
             <div className="mt-24 space-y-24">
@@ -120,7 +108,6 @@ export default function Home() {
               </SectionReveal>
             </div>
 
-            <CourseDetailsSection course={selectedCourse} />
           </div>
 
           <footer className="flex flex-col gap-10 border-t border-white/10 bg-brand-dark px-8 py-16 text-[#fff9f0] md:px-12">
