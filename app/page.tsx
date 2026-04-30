@@ -72,7 +72,7 @@ export default function Home() {
               <div className="mb-8 flex items-center gap-4 md:gap-6">
                 <div className="h-px flex-1 bg-[var(--border-subtle)]" />
                 <span className="shrink-0 text-[10px] font-black uppercase tracking-[0.4em] text-primary md:text-[11px] md:tracking-[0.6em]">
-                  استثمر في عينك.. قبل معداتك
+                  استثمر في رؤيتك... قبل عدستك.
                 </span>
               </div>
               <h2 className="mb-8 text-4xl font-black leading-none tracking-tight text-foreground md:mb-10 md:text-6xl">
