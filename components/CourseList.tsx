@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Camera, Zap, Heart, Clock, Wallet, ChevronDown, Star,
+  Camera, Zap, Heart, Clock, Wallet, ChevronDown,
   Video, Smartphone, MessageCircleQuestion, X, Send, MessageCircle, Share2,
 } from 'lucide-react';
 import { COURSES, type Course } from '@/lib/courses';
@@ -38,10 +38,9 @@ const CATEGORY_BAR: Record<Course['category'], string> = {
 };
 
 interface CourseListProps {
-  onSelectCourse?: (id: string) => void;
 }
 
-export default function CourseList({ onSelectCourse }: CourseListProps) {
+export default function CourseList({}: CourseListProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [askCourse, setAskCourse] = useState<Course | null>(null);
   const [shareTarget, setShareTarget] = useState<Course | null>(null);
@@ -77,7 +76,6 @@ export default function CourseList({ onSelectCourse }: CourseListProps) {
           layoutClass={index === 0 ? 'xl:col-span-2' : ''}
           isExpanded={expandedId === course.id}
           onToggleExpand={() => setExpandedId((id) => (id === course.id ? null : course.id))}
-          onLearnMore={() => onSelectCourse?.(course.id)}
           onAsk={() => setAskCourse(course)}
           onShare={() => setShareTarget(course)}
         />
@@ -112,13 +110,12 @@ interface CourseCardProps {
   layoutClass?: string;
   isExpanded: boolean;
   onToggleExpand: () => void;
-  onLearnMore: () => void;
   onAsk: () => void;
   onShare: () => void;
 }
 
 function CourseCard({
-  course, index, layoutClass, isExpanded, onToggleExpand, onLearnMore, onAsk, onShare,
+  course, index, layoutClass, isExpanded, onToggleExpand, onAsk, onShare,
 }: CourseCardProps) {
   return (
     <motion.div
@@ -242,15 +239,6 @@ function CourseCard({
           <div className="flex gap-2">
             <button
               type="button"
-              onClick={onLearnMore}
-              className="group/learn flex flex-1 items-center justify-center gap-1.5 rounded-2xl border border-brand-subtle bg-card py-3 text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground transition-all duration-300 hover:border-primary/25 hover:text-primary"
-            >
-              <Star size={13} className="text-accent transition-transform group-hover/learn:rotate-12" />
-              المحتوى
-            </button>
-
-            <button
-              type="button"
               onClick={onShare}
               aria-label="مشاركة الدورة"
               className="group/share rounded-2xl border border-brand-subtle bg-card p-3 text-muted-foreground transition-all hover:bg-primary/5"
@@ -261,10 +249,10 @@ function CourseCard({
             <button
               type="button"
               onClick={onAsk}
-              className="group/ask flex flex-1 items-center justify-center gap-1.5 rounded-2xl border border-brand-subtle bg-card py-3 text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground transition-all hover:bg-secondary/5"
+              className="group/ask flex flex-[2] items-center justify-center gap-1.5 rounded-2xl border border-brand-subtle bg-card py-3 text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground transition-all hover:bg-secondary/5"
             >
               <MessageCircleQuestion size={13} className="text-secondary transition-transform group-hover/ask:scale-110" />
-              اسأل المدرب
+              اسأل المساعد الذكي
             </button>
           </div>
 
@@ -330,7 +318,7 @@ function AskTrainerModal({
                   </div>
                   <div>
                     <h3 id="ask-title" className="text-lg font-extrabold uppercase tracking-tight text-foreground">
-                      اسأل المدرب
+                      اسأل المساعد الذكي
                     </h3>
                     <p className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground">
                       بخصوص: {course.title}
@@ -366,7 +354,7 @@ function AskTrainerModal({
                   disabled={!question.trim()}
                   className="btn-premium flex w-full items-center justify-center gap-3 rounded-2xl bg-primary py-4 text-[11px] font-extrabold uppercase tracking-[0.2em] text-white shadow-[0_14px_36px_-10px_var(--shadow-primary-glow)] transition-all hover:bg-primary-hover disabled:scale-100 disabled:opacity-50"
                 >
-                  إرسال السؤال للمدرب الذكي
+                  إرسال السؤال للمساعد الذكي
                   <Send size={16} />
                 </button>
 
