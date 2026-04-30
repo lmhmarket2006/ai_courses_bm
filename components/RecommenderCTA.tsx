@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'motion/react';
-import { Sparkles, ArrowLeft, Clock } from 'lucide-react';
+import { ArrowLeft, Clock } from 'lucide-react';
 
 interface RecommenderCTAProps {
   onClick: () => void;
@@ -12,7 +13,7 @@ interface RecommenderCTAProps {
  * زر CTA بارز يدعو الزائر لخوض اختبار التوصية الذكية.
  *
  * مُصمَّم ليكون عنصراً بصرياً قوياً يلفت الانتباه فور دخول الصفحة.
- * يستخدم gradient متحرّك وأيقونة Sparkles ليُشير إلى أنه ميزة AI متطوّرة.
+ * يستخدم gradient متحرّك وأيقونة المساعد لتوحيد الهوية البصرية.
  */
 export default function RecommenderCTA({ onClick }: RecommenderCTAProps) {
   return (
@@ -39,9 +40,16 @@ export default function RecommenderCTA({ onClick }: RecommenderCTAProps) {
         <motion.div
           animate={{ rotate: [0, 8, -8, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl logo-gradient text-white shadow-xl shadow-primary/20 md:h-20 md:w-20 md:rounded-3xl"
+          className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl logo-gradient text-white shadow-xl shadow-primary/20 md:h-20 md:w-20 md:rounded-3xl"
         >
-          <Sparkles size={28} className="md:w-9 md:h-9" />
+          <Image
+            src="/assistant-icon.png"
+            alt="أيقونة المساعد الذكي"
+            width={80}
+            height={80}
+            className="h-full w-full object-cover"
+            priority
+          />
         </motion.div>
 
         {/* نص الترويج */}
