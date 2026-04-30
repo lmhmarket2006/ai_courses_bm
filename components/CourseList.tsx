@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Camera, Zap, Heart, Clock, Wallet, ChevronDown,
-  Video, Smartphone, MessageCircleQuestion, X, Send, MessageCircle, Share2,
+  Video, Smartphone, MessageCircle, Share2,
 } from 'lucide-react';
 import { COURSES, type Course } from '@/lib/courses';
 import { getTopicDisplay } from '@/lib/topic-display';
@@ -42,29 +42,7 @@ interface CourseListProps {
 
 export default function CourseList({}: CourseListProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [askCourse, setAskCourse] = useState<Course | null>(null);
   const [shareTarget, setShareTarget] = useState<Course | null>(null);
-  const [question, setQuestion] = useState('');
-
-  const submitQuestion = () => {
-    if (!question.trim() || !askCourse) return;
-
-    window.dispatchEvent(
-      new CustomEvent('ask-chatbot', {
-        detail: { courseTitle: askCourse.title, question },
-      })
-    );
-
-    if (window.innerWidth < 1024) {
-      const mobileChat = document.getElementById('mobile-chatbot');
-      mobileChat?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    setQuestion('');
-    setAskCourse(null);
-  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 auto-rows-max">
@@ -76,7 +54,6 @@ export default function CourseList({}: CourseListProps) {
           layoutClass={index === 0 ? 'xl:col-span-2' : ''}
           isExpanded={expandedId === course.id}
           onToggleExpand={() => setExpandedId((id) => (id === course.id ? null : course.id))}
-          onAsk={() => setAskCourse(course)}
           onShare={() => setShareTarget(course)}
         />
       ))}
@@ -91,14 +68,6 @@ export default function CourseList({}: CourseListProps) {
         </div>
       </div>
 
-      <AskTrainerModal
-        course={askCourse}
-        question={question}
-        onQuestionChange={setQuestion}
-        onClose={() => setAskCourse(null)}
-        onSubmit={submitQuestion}
-      />
-
       <ShareModal course={shareTarget} onClose={() => setShareTarget(null)} />
     </div>
   );
@@ -110,12 +79,11 @@ interface CourseCardProps {
   layoutClass?: string;
   isExpanded: boolean;
   onToggleExpand: () => void;
-  onAsk: () => void;
   onShare: () => void;
 }
 
 function CourseCard({
-  course, index, layoutClass, isExpanded, onToggleExpand, onAsk, onShare,
+  course, index, layoutClass, isExpanded, onToggleExpand, onShare,
 }: CourseCardProps) {
   return (
     <motion.div
@@ -236,136 +204,35 @@ function CourseCard({
             <MessageCircle size={16} />
           </button>
 
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onToggleExpand}
+              aria-expanded={isExpanded}
+              className={cn(
+                'flex h-11 flex-1 items-center justify-center gap-2 rounded-2xl px-4 text-[9px] font-extrabold uppercase tracking-[0.3em] transition-all duration-300',
+                isExpanded
+                  ? 'bg-brand-dark text-white shadow-xl dark:bg-cream dark:text-brand-dark'
+                  : 'border border-brand-subtle bg-card text-muted-foreground hover:bg-primary/5 hover:text-foreground'
+              )}
+            >
+              {isExpanded ? 'إخفاء التفاصيل' : 'عرض المحاور'}
+              <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.4 }}>
+                <ChevronDown size={14} />
+              </motion.div>
+            </button>
+
             <button
               type="button"
               onClick={onShare}
               aria-label="مشاركة الدورة"
-              className="group/share rounded-2xl border border-brand-subtle bg-card p-3 text-muted-foreground transition-all hover:bg-primary/5"
+              className="group/share flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-brand-subtle bg-card text-muted-foreground transition-all hover:bg-primary/5"
             >
               <Share2 size={13} className="text-primary transition-transform group-hover/share:scale-110" />
             </button>
-
-            <button
-              type="button"
-              onClick={onAsk}
-              className="group/ask flex flex-[2] items-center justify-center gap-1.5 rounded-2xl border border-brand-subtle bg-card py-3 text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground transition-all hover:bg-secondary/5"
-            >
-              <MessageCircleQuestion size={13} className="text-secondary transition-transform group-hover/ask:scale-110" />
-              اسأل المساعد الذكي
-            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={onToggleExpand}
-            aria-expanded={isExpanded}
-            className={cn(
-              'flex w-full items-center justify-center gap-2 rounded-2xl py-3 text-[9px] font-extrabold uppercase tracking-[0.3em] transition-all duration-300',
-              isExpanded
-                ? 'bg-brand-dark text-white shadow-xl dark:bg-cream dark:text-brand-dark'
-                : 'border border-brand-subtle bg-card text-muted-foreground hover:bg-primary/5 hover:text-foreground'
-            )}
-          >
-            {isExpanded ? 'إخفاء التفاصيل' : 'عرض المحاور'}
-            <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.4 }}>
-              <ChevronDown size={14} />
-            </motion.div>
-          </button>
         </div>
       </div>
     </motion.div>
-  );
-}
-
-interface AskTrainerModalProps {
-  course: Course | null;
-  question: string;
-  onQuestionChange: (q: string) => void;
-  onClose: () => void;
-  onSubmit: () => void;
-}
-
-function AskTrainerModal({
-  course, question, onQuestionChange, onClose, onSubmit,
-}: AskTrainerModalProps) {
-  return (
-    <AnimatePresence>
-      {course && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-brand-dark/40 backdrop-blur-md dark:bg-black/50"
-          />
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="ask-title"
-            initial={{ opacity: 0, scale: 0.92, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 15 }}
-            transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-            className="relative w-full max-w-md overflow-hidden rounded-3xl border border-brand-subtle bg-card shadow-2xl"
-          >
-            <div className="p-8">
-              <div className="mb-8 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="rounded-xl bg-secondary/10 p-2.5 text-secondary">
-                    <MessageCircleQuestion size={24} />
-                  </div>
-                  <div>
-                    <h3 id="ask-title" className="text-lg font-extrabold uppercase tracking-tight text-foreground">
-                      اسأل المساعد الذكي
-                    </h3>
-                    <p className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground">
-                      بخصوص: {course.title}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  aria-label="إغلاق نافذة السؤال"
-                  className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-
-              <div className="space-y-6">
-                <label htmlFor="ask-textarea" className="sr-only">
-                  سؤالك
-                </label>
-                <textarea
-                  id="ask-textarea"
-                  value={question}
-                  onChange={(e) => onQuestionChange(e.target.value)}
-                  placeholder="اكتب سؤالك هنا بخصوص هذه الدورة..."
-                  className="h-32 w-full resize-none rounded-2xl border border-brand-subtle bg-page p-5 text-right text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-secondary/25"
-                  dir="rtl"
-                />
-
-                <button
-                  type="button"
-                  onClick={onSubmit}
-                  disabled={!question.trim()}
-                  className="btn-premium flex w-full items-center justify-center gap-3 rounded-2xl bg-primary py-4 text-[11px] font-extrabold uppercase tracking-[0.2em] text-white shadow-[0_14px_36px_-10px_var(--shadow-primary-glow)] transition-all hover:bg-primary-hover disabled:scale-100 disabled:opacity-50"
-                >
-                  إرسال السؤال للمساعد الذكي
-                  <Send size={16} />
-                </button>
-
-                <p className="text-center text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground">
-                  سيتم الرد عليك فوراً بواسطة مساعدنا الذكي في نافذة المحادثة
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
   );
 }

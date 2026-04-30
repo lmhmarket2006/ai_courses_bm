@@ -194,7 +194,6 @@ function ChatHeader({
                 width={44}
                 height={44}
                 className="h-full w-full rounded-2xl object-cover"
-                priority
               />
             </div>
             <div className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-brand-dark-surface bg-green-500" />

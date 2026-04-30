@@ -48,7 +48,6 @@ export default function RecommenderCTA({ onClick }: RecommenderCTAProps) {
             width={80}
             height={80}
             className="h-full w-full object-cover"
-            priority
           />
         </motion.div>
 

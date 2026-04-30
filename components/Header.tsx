@@ -30,7 +30,6 @@ export default function Header() {
               width={48}
               height={48}
               className="h-full w-full rounded-[9px] object-cover md:rounded-[14px]"
-              priority
             />
           </div>
           <div className="min-w-0">

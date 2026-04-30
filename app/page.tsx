@@ -48,7 +48,6 @@ export default function Home() {
                       width={48}
                       height={48}
                       className="h-full w-full object-cover"
-                      priority
                     />
                   </div>
                   <div className="text-right">
@@ -170,7 +169,6 @@ export default function Home() {
                 width={44}
                 height={44}
                 className="rounded-xl object-cover"
-                priority
               />
               <span className="absolute -right-1 -top-1 h-3.5 w-3.5 animate-pulse rounded-full border-2 border-accent bg-green-500" />
             </div>
