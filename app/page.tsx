@@ -43,7 +43,7 @@ export default function Home() {
                 <div className="flex items-center gap-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br from-secondary via-accent to-primary text-white shadow-lg">
                     <Image
-                      src="/assistant-mobile-icon.png"
+                      src="/assistant-icon.png"
                       alt="أيقونة المساعد الذكي"
                       width={48}
                       height={48}
@@ -165,7 +165,7 @@ export default function Home() {
           >
             <div className="relative">
               <Image
-                src="/assistant-mobile-icon.png"
+                src="/assistant-icon.png"
                 alt="أيقونة المساعد الذكي"
                 width={44}
                 height={44}
