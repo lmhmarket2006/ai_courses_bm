@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { useTheme } from 'next-themes';
-import { Camera, Instagram } from 'lucide-react';
+import Image from 'next/image';
+import { Instagram } from 'lucide-react';
 import { ACADEMY, CONTACT, COURSE_AVAILABILITY } from '@/lib/config';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
@@ -19,27 +19,19 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 }
 
 export default function Header() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => {
-    const id = requestAnimationFrame(() => setMounted(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
-  const isDark = mounted && resolvedTheme === 'dark';
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-brand-subtle bg-[var(--header-bg)] backdrop-blur-xl transition-colors duration-300 dark:border-white/10">
       <div className="max-w-7xl mx-auto px-4 md:px-12 h-[70px] md:h-[80px] flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 md:gap-5 min-w-0">
           <div className="relative w-10 h-10 md:w-12 md:h-12 logo-gradient rounded-xl md:rounded-2xl flex items-center justify-center p-[2px] shadow-lg shrink-0 group hover:scale-105 transition-all duration-500">
-            <div
-              className={`w-full h-full rounded-[9px] md:rounded-[14px] flex items-center justify-center ${
-                isDark ? 'bg-[#0A1030]' : 'bg-[#FFFBF5]'
-              }`}
-            >
-              <Camera size={20} className="text-primary" aria-hidden="true" />
-            </div>
+            <Image
+              src="/assistant-icon.png"
+              alt="شعار أكاديمية بيت المصور"
+              width={48}
+              height={48}
+              className="h-full w-full rounded-[9px] object-cover md:rounded-[14px]"
+              priority
+            />
           </div>
           <div className="min-w-0">
             <h1 className="text-lg md:text-2xl font-extrabold tracking-tight text-foreground border-none truncate">
