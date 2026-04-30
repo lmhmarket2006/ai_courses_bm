@@ -48,7 +48,7 @@ export function AnimatedBackground() {
 
       <div
         className="absolute inset-0 opacity-[0.025] mix-blend-overlay dark:opacity-[0.04]"
-        style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }}
+        style={{ backgroundImage: "url('/noise.svg')" }}
       />
     </div>
   );
