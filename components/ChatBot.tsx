@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Send, Bot, Loader2, X, RefreshCw, AlertCircle, Clock } from 'lucide-react';
+import Image from 'next/image';
+import { Send, Loader2, X, RefreshCw, AlertCircle, Clock } from 'lucide-react';
 import { useChat, type ChatStatus } from '@/hooks/use-chat';
 import { CHAT_ASSISTANT } from '@/lib/config';
 import { ChatCtaCard } from '@/components/chat/cta-card';
@@ -187,7 +188,14 @@ function ChatHeader({
         <div className="flex items-center gap-4 min-w-0">
           <div className="relative flex-shrink-0">
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-linear-to-br from-primary via-accent to-secondary text-white shadow-lg ring-1 ring-white/20 md:h-11 md:w-11">
-              <Bot className="w-5 h-5 md:w-6 md:h-6" />
+              <Image
+                src="/assistant-icon.png"
+                alt="أيقونة المساعد الذكي"
+                width={44}
+                height={44}
+                className="h-full w-full rounded-2xl object-cover"
+                priority
+              />
             </div>
             <div className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-brand-dark-surface bg-green-500" />
           </div>
