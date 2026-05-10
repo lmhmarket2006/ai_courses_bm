@@ -224,7 +224,7 @@ export default function TopicSlidesGallery({
                 <button
                   type="button"
                   onClick={() => goTo(lightbox - 1)}
-                  className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-white transition-colors hover:bg-white/20 md:right-8 md:h-12 md:w-12"
+                  className="absolute start-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-white transition-colors hover:bg-white/20 md:start-8 md:h-12 md:w-12"
                   aria-label="الشريحة السابقة"
                 >
                   <ChevronRight size={22} />
@@ -232,7 +232,7 @@ export default function TopicSlidesGallery({
                 <button
                   type="button"
                   onClick={() => goTo(lightbox + 1)}
-                  className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-white transition-colors hover:bg-white/20 md:left-8 md:h-12 md:w-12"
+                  className="absolute end-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-white transition-colors hover:bg-white/20 md:end-8 md:h-12 md:w-12"
                   aria-label="الشريحة التالية"
                 >
                   <ChevronLeft size={22} />

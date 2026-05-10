@@ -157,7 +157,7 @@ export default function ChatBot({ onMobileClose }: ChatBotProps) {
                   : 'اكتب استفسارك هنا...'
             }
             disabled={inputDisabled}
-            className="w-full rounded-2xl border border-white/10 bg-brand-dark p-4 text-[13px] text-white transition-all focus:border-accent/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full rounded-2xl border border-white/10 bg-brand-dark py-4 ps-4 pe-14 text-[13px] text-white transition-all focus:border-accent/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             autoComplete="off"
           />
           <button
@@ -165,7 +165,7 @@ export default function ChatBot({ onMobileClose }: ChatBotProps) {
             onClick={handleSend}
             disabled={inputDisabled || !input.trim()}
             aria-label="إرسال الرسالة"
-            className="absolute left-2 rounded-xl bg-primary p-2.5 text-white shadow-lg transition-all hover:scale-105 hover:bg-primary-hover disabled:scale-100 disabled:bg-slate-800 disabled:text-slate-600"
+            className="absolute end-2 rounded-xl bg-primary p-2.5 text-white shadow-lg transition-all hover:scale-105 hover:bg-primary-hover disabled:scale-100 disabled:bg-slate-800 disabled:text-slate-600"
           >
             <Send size={16} />
           </button>

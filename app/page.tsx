@@ -33,7 +33,7 @@ export default function Home() {
         </aside>
 
         <section className="bg-page pb-32 dark:bg-transparent">
-          <div className="mx-auto max-w-7xl px-6 py-12 md:px-16 md:py-24 lg:px-24">
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 md:px-14 md:py-20 lg:px-20 lg:py-24">
             <div className="mb-20 lg:hidden" id="mobile-chatbot">
               <button
                 type="button"

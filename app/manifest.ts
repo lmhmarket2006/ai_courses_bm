@@ -11,7 +11,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     id: '/',
     name: `${name} — ${ACADEMY.nameEn}`,
-    short_name: name.length > 12 ? 'بيت المصور' : name,
+    short_name: 'بيت المصور',
     description: ACADEMY.tagline,
     start_url: '/',
     scope: '/',
