@@ -69,6 +69,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -76,6 +78,14 @@
     background-color: var(--page-bg);
     color: var(--text-main);
     @apply antialiased selection:bg-primary/15 selection:text-primary;
+  }
+
+  /* أهداف لمس أوضح على الجوال — بدون تعطيل تكبير الصفحة بالكامل */
+  button,
+  a[role='button'],
+  [type='button'],
+  [type='submit'] {
+    touch-action: manipulation;
   }
 }
 
@@ -98,6 +108,19 @@
 
   .border-brand-subtle {
     border-color: var(--border-subtle);
+  }
+
+  /** مسافات منطقية RTL — للاستخدام مع margin/padding عند الحاجة */
+  .ms-safe {
+    margin-inline-start: max(0.5rem, env(safe-area-inset-inline-start, 0px));
+  }
+
+  .me-safe {
+    margin-inline-end: max(0.5rem, env(safe-area-inset-inline-end, 0px));
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
 
