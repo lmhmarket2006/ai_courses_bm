@@ -3,9 +3,9 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  /** Next 16+ مع Turbopack الافتراضي — يُسكت تعارض webpack الفارغ عند الحاجة */
-  turbopack: {},
-
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
   typescript: {
     ignoreBuildErrors: false,
   },

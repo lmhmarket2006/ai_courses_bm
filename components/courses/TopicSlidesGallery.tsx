@@ -114,7 +114,7 @@ export default function TopicSlidesGallery({
                         className="h-full w-full object-contain"
                         onError={() => setBroken((b) => ({ ...b, [i]: true }))}
                       />
-                      <span className="absolute bottom-2 left-2 flex items-center gap-1.5 rounded-lg border border-white/20 bg-black/55 px-2 py-1 text-[9px] font-black uppercase tracking-widest text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 md:text-[10px]">
+                      <span className="absolute bottom-2 end-2 flex items-center gap-1.5 rounded-lg border border-white/20 bg-black/55 px-2 py-1 text-[9px] font-black uppercase tracking-widest text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 md:text-[10px]">
                         <Maximize2 size={12} aria-hidden />
                         عرض كامل
                       </span>
