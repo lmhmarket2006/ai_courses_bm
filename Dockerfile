@@ -1,19 +1,16 @@
 # Next.js 15 — وضع standalone (يُطابق next.config.ts) لنشر موثوق على Railway
 # https://nextjs.org/docs/app/api-reference/config/next-config-js/output
 
-FROM node:20-alpine AS base
+FROM node:20-bookworm-slim AS base
+WORKDIR /app
 
 # ─── التبعيات ───
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-
 COPY package.json package-lock.json* ./
 RUN npm ci
 
 # ─── البناء ───
 FROM base AS builder
-WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
 COPY --from=deps /app/node_modules ./node_modules
@@ -23,13 +20,15 @@ RUN npm run build
 
 # ─── التشغيل ───
 FROM base AS runner
-WORKDIR /app
-
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends openssl ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd --system --gid 1001 nodejs \
+  && useradd --system --uid 1001 --gid nodejs nextjs
 
 COPY --from=builder /app/public ./public
 
