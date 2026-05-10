@@ -3,12 +3,9 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // ملاحظة: تم تفعيل فحص ESLint أثناء البناء بعدما كان مُعطّلاً، لأن إخفاء الأخطاء
-  // أثناء النشر يعني أن مشاكل الجودة تنزل للإنتاج. أعد تفعيل التجاهل مؤقتاً
-  // إذا كنت تنشر بسرعة وتحتاج إلى إصلاح الأخطاء لاحقاً.
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
+  /** Next 16+ مع Turbopack الافتراضي — يُسكت تعارض webpack الفارغ عند الحاجة */
+  turbopack: {},
+
   typescript: {
     ignoreBuildErrors: false,
   },
