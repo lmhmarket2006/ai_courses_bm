@@ -21,7 +21,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-brand-subtle bg-[var(--header-bg)] backdrop-blur-xl transition-colors duration-300 dark:border-white/10">
-      <div className="max-w-7xl mx-auto px-4 md:px-12 h-[70px] md:h-[80px] flex items-center justify-between gap-4">
+      <div className="mx-auto flex h-[70px] max-w-7xl items-center justify-between gap-3 px-3 sm:gap-4 sm:px-4 md:h-[80px] md:px-10 lg:px-12">
         <div className="flex items-center gap-3 md:gap-5 min-w-0">
           <div className="relative w-10 h-10 md:w-12 md:h-12 logo-gradient rounded-xl md:rounded-2xl flex items-center justify-center p-[2px] shadow-lg shrink-0 group hover:scale-105 transition-all duration-500">
             <Image

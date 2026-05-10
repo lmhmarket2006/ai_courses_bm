@@ -117,7 +117,7 @@ export default function Home() {
 
           </div>
 
-          <footer className="flex flex-col gap-10 border-t border-white/10 bg-brand-dark px-8 py-16 text-[#fff9f0] md:px-12">
+          <footer className="flex flex-col gap-10 border-t border-white/10 bg-brand-dark px-4 py-12 text-[#fff9f0] sm:px-8 sm:py-14 md:px-12 md:py-16">
             <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-10 md:flex-row">
               <div className="flex items-center gap-4">
                 <div className="h-8 w-8 shrink-0 rounded-lg logo-gradient" />
