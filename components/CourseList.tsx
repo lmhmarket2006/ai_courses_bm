@@ -11,6 +11,7 @@ import { getTopicDisplay } from '@/lib/topic-display';
 import { openBooking } from '@/lib/whatsapp';
 import ShareModal from '@/components/share/ShareModal';
 import TopicSlidesGallery from '@/components/courses/TopicSlidesGallery';
+import CourseTopicsNarrative from '@/components/courses/CourseTopicsNarrative';
 import { cn } from '@/lib/utils';
 import { cardHover } from '@/lib/motion-variants';
 
@@ -180,34 +181,45 @@ function CourseCard({
                       />
                     </>
                   )}
-                  <h4 className="mb-4 text-[10px] font-extrabold uppercase tracking-[0.2em] text-accent">
-                    محاور البرنامج:
-                  </h4>
-                  <ul className="space-y-4">
-                    {course.topics.map((topic, i) => {
-                      const { icon, colorClass, categoryName } = getTopicDisplay(topic, 14);
-                      return (
-                        <li key={i} className="group/item flex items-center gap-4 text-[11px] text-muted-foreground">
-                          <div
-                            className={cn(
-                              'flex shrink-0 items-center justify-center rounded-xl border p-2 shadow-sm transition-all group-hover/item:scale-110',
-                              colorClass
-                            )}
-                          >
-                            {icon}
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="mb-0.5 text-[7px] font-black uppercase tracking-[0.2em] opacity-60">
-                              {categoryName}
-                            </span>
-                            <span className="font-medium leading-tight transition-colors group-hover/item:text-foreground">
-                              {topic}
-                            </span>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  {course.topicsNarrative ? (
+                    <>
+                      <h4 className="mb-3 text-[10px] font-extrabold uppercase tracking-[0.2em] text-accent">
+                        تفاصيل الورشة
+                      </h4>
+                      <CourseTopicsNarrative text={course.topicsNarrative} />
+                    </>
+                  ) : (
+                    <>
+                      <h4 className="mb-4 text-[10px] font-extrabold uppercase tracking-[0.2em] text-accent">
+                        محاور البرنامج:
+                      </h4>
+                      <ul className="space-y-4">
+                        {course.topics.map((topic, i) => {
+                          const { icon, colorClass, categoryName } = getTopicDisplay(topic, 14);
+                          return (
+                            <li key={i} className="group/item flex items-center gap-4 text-[11px] text-muted-foreground">
+                              <div
+                                className={cn(
+                                  'flex shrink-0 items-center justify-center rounded-xl border p-2 shadow-sm transition-all group-hover/item:scale-110',
+                                  colorClass
+                                )}
+                              >
+                                {icon}
+                              </div>
+                              <div className="flex flex-col">
+                                <span className="mb-0.5 text-[7px] font-black uppercase tracking-[0.2em] opacity-60">
+                                  {categoryName}
+                                </span>
+                                <span className="font-medium leading-tight transition-colors group-hover/item:text-foreground">
+                                  {topic}
+                                </span>
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>

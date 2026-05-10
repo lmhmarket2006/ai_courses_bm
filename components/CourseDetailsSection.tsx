@@ -11,6 +11,7 @@ import { getTopicDisplay } from '@/lib/topic-display';
 import { openBooking } from '@/lib/whatsapp';
 import InstructorBadge from './InstructorBadge';
 import TopicSlidesGallery from '@/components/courses/TopicSlidesGallery';
+import CourseTopicsNarrative from '@/components/courses/CourseTopicsNarrative';
 
 interface CourseDetailsSectionProps {
   course: Course | null;
@@ -146,7 +147,7 @@ function CourseTopics({ course }: { course: Course }) {
       <div>
         <h3 className="mb-8 flex items-center gap-4 text-lg font-black uppercase tracking-widest text-foreground md:mb-12 md:text-xl">
           <div className="w-1.5 md:w-2 h-6 md:h-8 logo-gradient rounded-full" />
-          محاور الرحلة التعليمية
+          {course.topicsNarrative ? 'تفاصيل الورشة' : 'محاور الرحلة التعليمية'}
         </h3>
         {course.topicSlides && course.topicSlides.length > 0 && (
           <>
@@ -167,33 +168,37 @@ function CourseTopics({ course }: { course: Course }) {
             />
           </>
         )}
-        <ul className="space-y-4 md:space-y-6 relative">
-          <div className="absolute bottom-4 right-[23px] top-4 hidden w-px bg-[var(--border-subtle)] sm:block md:right-[27px]" />
-          {course.topics.map((topic, i) => {
-            const { icon, colorClass, categoryName } = getTopicDisplay(topic, 18);
-            return (
-              <motion.li
-                key={i}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="flex gap-4 md:gap-8 items-center group relative"
-              >
-                <div className={`z-10 shrink-0 rounded-xl border bg-card p-3 shadow-sm transition-all duration-500 group-hover:scale-110 md:rounded-2xl md:p-4 ${colorClass}`}>
-                  {icon}
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] opacity-40 mb-1 md:mb-1.5">
-                    {categoryName}
-                  </span>
-                  <span className="text-base font-bold leading-tight text-muted-foreground transition-colors group-hover:text-foreground md:text-lg">
-                    {topic}
-                  </span>
-                </div>
-              </motion.li>
-            );
-          })}
-        </ul>
+        {course.topicsNarrative ? (
+          <CourseTopicsNarrative text={course.topicsNarrative} className="md:text-[14px] md:leading-[1.9]" />
+        ) : (
+          <ul className="space-y-4 md:space-y-6 relative">
+            <div className="absolute bottom-4 right-[23px] top-4 hidden w-px bg-[var(--border-subtle)] sm:block md:right-[27px]" />
+            {course.topics.map((topic, i) => {
+              const { icon, colorClass, categoryName } = getTopicDisplay(topic, 18);
+              return (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex gap-4 md:gap-8 items-center group relative"
+                >
+                  <div className={`z-10 shrink-0 rounded-xl border bg-card p-3 shadow-sm transition-all duration-500 group-hover:scale-110 md:rounded-2xl md:p-4 ${colorClass}`}>
+                    {icon}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] opacity-40 mb-1 md:mb-1.5">
+                      {categoryName}
+                    </span>
+                    <span className="text-base font-bold leading-tight text-muted-foreground transition-colors group-hover:text-foreground md:text-lg">
+                      {topic}
+                    </span>
+                  </div>
+                </motion.li>
+              );
+            })}
+          </ul>
+        )}
       </div>
 
       <div className="space-y-6 border-t border-brand-subtle pt-10">
