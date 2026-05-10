@@ -3,6 +3,7 @@ import { IBM_Plex_Sans_Arabic, Source_Sans_3 } from 'next/font/google';
 import { ACADEMY } from '@/lib/config';
 import { ToastProvider } from '@/components/ui/Toast';
 import { ThemeProviders } from '@/components/ThemeProviders';
+import PwaRegister from '@/components/PwaRegister';
 import './globals.css';
 
 const fontAr = IBM_Plex_Sans_Arabic({
@@ -66,6 +67,15 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  applicationName: ACADEMY.nameEn,
+  appleWebApp: {
+    capable: true,
+    title: ACADEMY.nameEn,
+    statusBarStyle: 'black-translucent',
+  },
+  formatDetection: {
+    telephone: false,
+  },
 };
 
 export const viewport: Viewport = {
@@ -82,9 +92,15 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl" className={`${fontAr.variable} ${fontEn.variable}`} suppressHydrationWarning>
-      <body suppressHydrationWarning className="font-sans bg-page text-foreground antialiased min-h-screen">
+      <body
+        suppressHydrationWarning
+        className="font-sans min-h-dvh min-h-[100svh] overflow-x-clip bg-page text-foreground antialiased"
+      >
         <ThemeProviders>
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider>
+            <PwaRegister />
+            {children}
+          </ToastProvider>
         </ThemeProviders>
       </body>
     </html>
