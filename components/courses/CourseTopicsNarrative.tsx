@@ -17,7 +17,7 @@ export default function CourseTopicsNarrative({ text, className }: CourseTopicsN
     <div
       dir="rtl"
       className={cn(
-        'whitespace-pre-wrap text-right text-[12px] font-medium leading-[1.85] text-foreground md:text-[13px]',
+        'min-w-0 whitespace-pre-wrap break-words text-right text-[12px] font-medium leading-[1.85] text-foreground md:text-[13px]',
         'rounded-2xl border border-brand-subtle bg-page/80 p-5 shadow-inner dark:bg-page/40 md:p-7',
         className
       )}

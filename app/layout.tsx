@@ -75,6 +75,8 @@ export const viewport: Viewport = {
   ],
   width: 'device-width',
   initialScale: 1,
+  /** يفعّل env(safe-area-inset-*) لأزرار ثابتة على آيفون والشاشات ذات النوتش */
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

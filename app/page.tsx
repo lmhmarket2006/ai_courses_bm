@@ -149,7 +149,7 @@ export default function Home() {
             whileInView={{ opacity: 1, scale: 1 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             aria-label="العودة للأعلى"
-            className="group fixed bottom-8 left-8 z-50 flex h-14 w-14 items-center justify-center rounded-2xl border border-brand-subtle bg-card text-primary shadow-xl transition-all duration-300 hover:border-primary/30 hover:bg-primary hover:text-white"
+            className="group fixed z-50 flex h-14 w-14 items-center justify-center rounded-2xl border border-brand-subtle bg-card text-primary shadow-xl transition-all duration-300 hover:border-primary/30 hover:bg-primary hover:text-white left-[max(1.25rem,env(safe-area-inset-left,0px))] bottom-[max(1.25rem,env(safe-area-inset-bottom,0px))]"
           >
             <ArrowUp size={24} className="transition-transform group-hover:-translate-y-1" />
           </motion.button>
@@ -160,7 +160,7 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             onClick={() => setIsChatOpen(true)}
             aria-label="فتح المساعد الذكي"
-            className="fixed bottom-8 right-8 z-50 flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-primary via-accent to-secondary text-white shadow-2xl ring-1 ring-white/20 transition-all hover:scale-105 active:scale-95 lg:hidden"
+            className="fixed z-50 flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-primary via-accent to-secondary text-white shadow-2xl ring-1 ring-white/20 transition-all hover:scale-105 active:scale-95 lg:hidden right-[max(1.25rem,env(safe-area-inset-right,0px))] bottom-[max(1.25rem,env(safe-area-inset-bottom,0px))]"
           >
             <div className="relative">
               <Image

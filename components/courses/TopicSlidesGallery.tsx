@@ -86,7 +86,8 @@ export default function TopicSlidesGallery({
                 }}
                 className={cn(
                   'snap-center shrink-0',
-                  'w-[min(100%,calc(100%-2.5rem))] max-w-[min(520px,calc(100vw-4rem))]',
+                  /* min(…,100%) بدل 100vw لتفادي تمدد أفقي داخل البطاقة على الجوال */
+                  'w-[min(92%,520px)] max-w-full sm:w-[min(88%,520px)]',
                   'md:w-[min(480px,85%)]'
                 )}
               >
