@@ -61,7 +61,7 @@ export const CHAT_PRICING_COURSES = [
   { icon: '📱', title: 'التصوير بالجوال', delivery: '🌐 أونلاين', priceApprox: '42$' },
   { icon: '📸', title: 'أساسيات التصوير', delivery: '🏫 حضوري', priceApprox: '800-1200 ر.س' },
   { icon: '🎨', title: 'التصوير الإبداعي', delivery: '🏫 حضوري', priceApprox: '1200-1800 ر.س' },
-  { icon: '💡', title: 'الإضاءة الاحترافية', delivery: '🏫 حضوري', priceApprox: '1500-2000 ر.س' },
+  { icon: '💡', title: 'ورشة الإضاءة الشاملة', delivery: '🏫 حضوري', priceApprox: '~1800 ر.س (عرض لفترة محدودة)' },
   { icon: '🎬', title: 'تصوير الفيديو', delivery: '🏫 حضوري', priceApprox: '1500-2500 ر.س' },
   { icon: '🖼️', title: 'تعديل الصور', delivery: '🏫 حضوري', priceApprox: '800-1200 ر.س' },
   { icon: '👤', title: 'التصوير الشخصي', delivery: '🏫 حضوري', priceApprox: '1200-1800 ر.س' },

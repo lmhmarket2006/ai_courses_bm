@@ -10,6 +10,7 @@ import { COURSES, type Course } from '@/lib/courses';
 import { getTopicDisplay } from '@/lib/topic-display';
 import { openBooking } from '@/lib/whatsapp';
 import ShareModal from '@/components/share/ShareModal';
+import TopicSlidesGallery from '@/components/courses/TopicSlidesGallery';
 import { cn } from '@/lib/utils';
 import { cardHover } from '@/lib/motion-variants';
 
@@ -160,6 +161,25 @@ function CourseCard({
             >
               <div className="mb-8 space-y-5 border-t border-brand-subtle pt-6">
                 <div>
+                  {course.topicSlides && course.topicSlides.length > 0 && (
+                    <>
+                      <h4
+                        id={`course-${course.id}-slides-heading`}
+                        className="mb-3 text-[10px] font-extrabold uppercase tracking-[0.2em] text-primary"
+                      >
+                        معرض المحاور
+                      </h4>
+                      <TopicSlidesGallery
+                        slides={course.topicSlides}
+                        topicTexts={
+                          course.topicSlides.length === course.topics.length
+                            ? course.topics
+                            : undefined
+                        }
+                        headingId={`course-${course.id}-slides-heading`}
+                      />
+                    </>
+                  )}
                   <h4 className="mb-4 text-[10px] font-extrabold uppercase tracking-[0.2em] text-accent">
                     محاور البرنامج:
                   </h4>

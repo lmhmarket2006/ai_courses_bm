@@ -10,6 +10,7 @@ import type { Course } from '@/lib/courses';
 import { getTopicDisplay } from '@/lib/topic-display';
 import { openBooking } from '@/lib/whatsapp';
 import InstructorBadge from './InstructorBadge';
+import TopicSlidesGallery from '@/components/courses/TopicSlidesGallery';
 
 interface CourseDetailsSectionProps {
   course: Course | null;
@@ -147,6 +148,25 @@ function CourseTopics({ course }: { course: Course }) {
           <div className="w-1.5 md:w-2 h-6 md:h-8 logo-gradient rounded-full" />
           محاور الرحلة التعليمية
         </h3>
+        {course.topicSlides && course.topicSlides.length > 0 && (
+          <>
+            <h4
+              id={`details-${course.id}-slides-heading`}
+              className="mb-3 text-[10px] font-black uppercase tracking-[0.3em] text-primary md:text-[11px]"
+            >
+              معرض المحاور
+            </h4>
+            <TopicSlidesGallery
+              slides={course.topicSlides}
+              topicTexts={
+                course.topicSlides.length === course.topics.length
+                  ? course.topics
+                  : undefined
+              }
+              headingId={`details-${course.id}-slides-heading`}
+            />
+          </>
+        )}
         <ul className="space-y-4 md:space-y-6 relative">
           <div className="absolute bottom-4 right-[23px] top-4 hidden w-px bg-[var(--border-subtle)] sm:block md:right-[27px]" />
           {course.topics.map((topic, i) => {
